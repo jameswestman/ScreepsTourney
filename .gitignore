@@ -1,2 +1,3 @@
 server/
 resources/steam_apikey.txt
+.DS_Store
