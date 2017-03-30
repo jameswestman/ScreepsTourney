@@ -1,0 +1,84 @@
+<!-- For generating terrain. -->
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Screeps Terrain Generator</title>
+        <style>
+            td {
+                width: 15px;
+                height: 15px;
+                background-color: gray;
+            }
+
+            td.wall {
+                background-color: black;
+            }
+            td.swamp {
+                background-color: green;
+            }
+        </style>
+    </head>
+
+    <body>
+        <button id="stroke-wall">Wall</button>
+        <button id="stroke-swamp">Swamp</button>
+        <button id="stroke-blank">Clear</button>
+        <span id="coords"></span>
+
+        <table id="grid">
+        </table>
+
+        <button id="generate">Generate</button>
+        <textarea id="out"></textarea>
+
+        <script type="text/javascript">
+            var mouseDown = false;
+            var stroke = "wall";
+            var table = document.getElementById("grid");
+            var coords = document.getElementById("coords")
+
+            table.addEventListener("mousedown", e => {
+                mouseDown = true;
+            });
+            table.addEventListener("mouseup", e => {
+                mouseDown = false;
+            });
+
+            for(let y = 0; y < 50; y ++) {
+                var row = document.createElement("tr")
+                for(let x = 0; x < 50; x ++) {
+                    let cell = document.createElement("td");
+                    cell.id = x + "-" + y;
+                    cell.addEventListener("mouseover", e => {
+                        if(mouseDown) {
+                            cell.className = stroke;
+                        }
+
+                        coords.innerHTML = `(${x}, ${y})`;
+                    });
+                    row.appendChild(cell);
+                }
+                grid.appendChild(row);
+            }
+
+            document.getElementById("stroke-wall").addEventListener("click", e => stroke = "wall");
+            document.getElementById("stroke-swamp").addEventListener("click", e => stroke = "swamp");
+            document.getElementById("stroke-blank").addEventListener("click", e => stroke = "");
+
+            document.getElementById("generate").addEventListener("click", e => {
+                var out = "";
+                var cells = document.querySelectorAll("td");
+                cells.forEach(c => {
+                    switch(c.className) {
+                        case "wall": out += "1"; break;
+                        case "swamp": out += "2"; break;
+                        default: out += "0"; break;
+                    }
+                });
+
+                document.getElementById("out").innerHTML = out;
+            });
+        </script>
+    </body>
+</html>
