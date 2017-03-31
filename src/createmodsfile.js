@@ -2,8 +2,8 @@
 
 "use strict";
 
-const path = require('path');
-const fs = require('fs');
+const path = require("path");
+const fs = require("fs");
 
 /*
  * This script downloads the list of players and their code, then outputs a
@@ -22,6 +22,8 @@ var mods = {
 var challenge = {
     cpu: 10,
     gcl: 1,
+
+    roomTemplate: "center_square.json",
 
     winConditions: {
         "rcl": 6

@@ -1,7 +1,7 @@
 "use strict";
 
 const webinterface = require("./webinterface.js");
-const removeUser = require("./removeuser.js")
+const removeUser = require("./removeuser.js");
 
 module.exports.rcl = function(level, config) {
     var db = config.common.storage.db;

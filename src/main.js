@@ -8,14 +8,15 @@
  * and victory/failure conditions.
  */
 
-const winconditions = require("./winconditions");
-const loseconditions = require("./loseconditions");
+const winconditions = require("./winconditions.js");
+const loseconditions = require("./loseconditions.js");
+const path = require("path");
 
 module.exports = function(config) {
-    var roomTemplate = require("../resources/room_templates/center_square");
     var db = config.common.storage.db;
     var sb;
     var challengeParams = require("../server/challenge.json");
+    var roomTemplate = require(path.join("../resources/room_templates/", challengeParams.roomTemplate));
 
     var roomnum = 0;
 
@@ -70,10 +71,6 @@ module.exports = function(config) {
             x: opts.x,
             y: opts.y
         });
-    }
-
-    function setRoomTemplate(template) {
-        roomTemplate = template;
     }
 
     function removeDefaultBots() {

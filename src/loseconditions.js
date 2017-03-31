@@ -1,7 +1,7 @@
 "use strict";
 
-const webinterface = require("./webinterface");
-const removeUser = require("./removeuser.js")
+const webinterface = require("./webinterface.js");
+const removeUser = require("./removeuser.js");
 
 module.exports.time = function(limit, config) {
     var db = config.common.storage.db;
