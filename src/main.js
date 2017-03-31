@@ -107,9 +107,12 @@ module.exports = function(config) {
 
     if(config.engine) {
         config.engine.mainLoopMinDuration = 1;
+    }
 
-        config.engine.on("mainLoopStage", stage => {
-            if(stage === "incrementGameTime") {
+    if(config.cronjobs) {
+        config.cronjobs.tourney = [
+            1,
+            function tourney() {
                 // detect winners and losers
 
                 for(let i in challengeParams.winConditions) {
@@ -119,6 +122,6 @@ module.exports = function(config) {
                     loseconditions[i](challengeParams.loseConditions[i], config);
                 }
             }
-        })
+        ];
     }
 }

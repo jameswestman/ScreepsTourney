@@ -12,7 +12,8 @@ module.exports.rcl = function(level, config) {
             db["users"].findOne({ _id: controller.user })
             .then(user => {
                 if(user) {
-                    config.engine.driver.getGameTime()
+                    var env = config.common.storage.env;
+                    env.get(env.keys.GAMETIME)
                     .then(time => {
                         webinterface.playerFinish(user.username, time);
                     });
