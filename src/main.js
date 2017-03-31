@@ -8,6 +8,8 @@
  * and victory/failure conditions.
  */
 
+const winconditions = require("./winconditions");
+
 module.exports = function(config) {
     var roomTemplate = require("../resources/room_templates/center_square");
     var db = config.common.storage.db;
@@ -108,6 +110,10 @@ module.exports = function(config) {
         config.engine.on("mainLoopStage", stage => {
             if(stage === "incrementGameTime") {
                 // detect winners and losers
+
+                for(let i in challengeParams.winConditions) {
+                    winconditions[i](challengeParams.winConditions[i], config);
+                }
             }
         })
     }
