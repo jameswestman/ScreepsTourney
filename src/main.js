@@ -92,15 +92,23 @@ module.exports = function(config) {
 		config.cli.on("cliSandbox", sandbox => {
             sb = sandbox;
             sandbox.tourney = {
-                addPlayer: addPlayer,
-                setRoomTemplate: setRoomTemplate,
-                removeDefaultBots: removeDefaultBots,
-                loadAllPlayers: loadAllPlayers
+                load: function() {
+                    sb.system.pauseSimulation();
+                    removeDefaultBots();
+                    loadAllPlayers();
+                    sb.system.resumeSimulation();
+                }
             };
 		});
     }
 
     if(config.engine) {
         config.engine.mainLoopMinDuration = 1;
+
+        config.engine.on("mainLoopStage", stage => {
+            if(stage === "incrementGameTime") {
+                // detect winners and losers
+            }
+        })
     }
 }

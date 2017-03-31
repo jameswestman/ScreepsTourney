@@ -23,4 +23,4 @@ screeps start &
 sleep 5
 
 # start the CLI and feed it some commands
-echo 'tourney.removeDefaultBots();tourney.loadAllPlayers();' | screeps cli
+echo 'tourney.load();' | screeps cli
