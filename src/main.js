@@ -12,10 +12,7 @@ module.exports = function(config) {
     var roomTemplate = require("../resources/room_templates/center_square");
     var db = config.common.storage.db;
     var sb;
-    var challengeParams = {
-        cpu: 10,
-        gcl: 1
-    };
+    var challengeParams = require("../server/challenge.json");
 
     var roomnum = 0;
 
@@ -71,10 +68,6 @@ module.exports = function(config) {
         roomTemplate = template;
     }
 
-    function setChallengeParameter(name, value) {
-        challengeParams[name] = value;
-    }
-
     function removeDefaultBots() {
         sb.bots.removeUser("MichaelBot");
         sb.bots.removeUser("EmmaBot");
@@ -96,7 +89,6 @@ module.exports = function(config) {
             sandbox.tourney = {
                 addPlayer: addPlayer,
                 setRoomTemplate: setRoomTemplate,
-                setChallengeParameter: setChallengeParameter,
                 removeDefaultBots: removeDefaultBots,
                 loadAllPlayers: loadAllPlayers
             };

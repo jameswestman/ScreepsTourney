@@ -19,6 +19,18 @@ var mods = {
 
 // todo: actually download stuff
 
+var challenge = {
+    cpu: 10,
+    gcl: 1,
+
+    winConditions: {
+        "rcl": 1
+    }
+}
+
+fs.writeFile("../server/challenge.json", JSON.stringify(challenge), () => {
+});
+
 var playerlist = [
     {
         name: "FlyingPiMonster",
