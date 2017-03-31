@@ -47,20 +47,25 @@ module.exports = function(config) {
         }
     }
 
-    function addPlayer(name, x, y) {
+    function addPlayer(name, opts) {
         // create the player's room
         var room = "W" + Math.floor(roomnum / 10) + "N" + (roomnum % 10);
         roomnum ++;
         sb.map.generateRoom(room);
         applyRoomTemplate(room);
 
+        // some challenges allow choosing the mineral type in the room
+        if(challengeParams.allowChooseMineral && opts.mineral) {
+            db["rooms.objects"].update({ $and: [{ type: "mineral" }, { room: room }] }, { $set: { mineralType: opts.mineral } });
+        }
+
         // spawn the new player
         sb.bots.spawn(name, room, {
             username: name,
             cpu: challengeParams.cpu,
             gcl: challengeParams.gcl,
-            x: x,
-            y: y
+            x: opts.x,
+            y: opts.y
         });
     }
 
@@ -79,7 +84,7 @@ module.exports = function(config) {
         var playerlist = require("../server/players.json");
 
         for(let p of playerlist) {
-            addPlayer(p.name, p.opts.x, p.opts.y);
+            addPlayer(p.name, p.opts);
         }
     }
 
