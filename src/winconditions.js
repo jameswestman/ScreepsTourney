@@ -1,6 +1,7 @@
 "use strict";
 
-const webinterface = require("./webinterface");
+const webinterface = require("./webinterface.js");
+const removeUser = require("./removeuser.js")
 
 module.exports.rcl = function(level, config) {
     var db = config.common.storage.db;
@@ -16,9 +17,7 @@ module.exports.rcl = function(level, config) {
                         webinterface.playerFinish(user.username, time);
                     });
 
-                    // remove user
-                    db["rooms.objects"].removeWhere({ user: user._id });
-                    db["users"].removeWhere({ _id: user._id });
+                    removeUser(user._id, db);
                 }
             });
         });

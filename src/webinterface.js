@@ -16,6 +16,9 @@ exports.uploadLogs = function(name, logs) {
 exports.statusReport = function(data) {
 };
 
+/*
+ * A score of -1 indicates failure (for any cause)
+ */
 exports.playerFinish = function(name, score) {
     console.log(name + " finished with a score of " + score);
 };

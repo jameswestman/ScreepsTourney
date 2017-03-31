@@ -24,7 +24,10 @@ var challenge = {
     gcl: 1,
 
     winConditions: {
-        "rcl": 1
+        "rcl": 6
+    },
+    loseConditions: {
+        "time": 1000
     }
 }
 

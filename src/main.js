@@ -9,6 +9,7 @@
  */
 
 const winconditions = require("./winconditions");
+const loseconditions = require("./loseconditions");
 
 module.exports = function(config) {
     var roomTemplate = require("../resources/room_templates/center_square");
@@ -113,6 +114,9 @@ module.exports = function(config) {
 
                 for(let i in challengeParams.winConditions) {
                     winconditions[i](challengeParams.winConditions[i], config);
+                }
+                for(let i in challengeParams.loseConditions) {
+                    loseconditions[i](challengeParams.loseConditions[i], config);
                 }
             }
         })
