@@ -2,7 +2,7 @@
 
 Do you love automation? Programming? Competition? Of course you do! The Screeps Tourney is a coding competition based around [Screeps](https://screeps.com), "the world's first MMO strategy sandbox game for programmers."
 
-This repository is for the tourney processor. It is a mod and wrapper for the standard Screeps server. It will pull data from the tourney web interface, which has not been created yet.
+This repository is for the tourney processor. It is a mod and wrapper for the standard Screeps server. It will pull data from the tourney web interface, which is in [this repository](https://github.com/FlyingPiMonster/ScreepsTourneySite).
 
 ## Challenge Overview
 
