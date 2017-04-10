@@ -1,0 +1,26 @@
+{
+  "name": "screepstourney",
+  "version": "1.0.0",
+  "description": "Screeps tournament processor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "setup": "./index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FlyingPiMonster/ScreepsTourney.git"
+  },
+  "author": "FlyingPiMonster",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/FlyingPiMonster/ScreepsTourney/issues"
+  },
+  "homepage": "https://github.com/FlyingPiMonster/ScreepsTourney#readme",
+  "dependencies": {
+    "fs-promise": "^2.0.2",
+    "lodash": "^4.17.4",
+    "request-promise-native": "^1.0.3",
+    "yargs": "^7.0.2"
+  }
+}
