@@ -105,20 +105,4 @@ module.exports = function(config) {
     if(config.engine) {
         config.engine.mainLoopMinDuration = 1;
     }
-
-    if(config.cronjobs) {
-        config.cronjobs.tourney = [
-            1,
-            function tourney() {
-                // detect winners and losers
-
-                for(let i in challengeParams.winConditions) {
-                    winconditions[i](challengeParams.winConditions[i], config);
-                }
-                for(let i in challengeParams.loseConditions) {
-                    loseconditions[i](challengeParams.loseConditions[i], config);
-                }
-            }
-        ];
-    }
 }
