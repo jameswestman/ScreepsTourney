@@ -4,24 +4,51 @@
  * This file provides an interface with the web server side of the project.
  */
 
-const http = require('http');
+const http = require('http')
+const request = require('request-promise-native');
 
-const GET = "GET";
-const POST = "POST";
-const PUT = "PUT";
+const GET = "GET"
+const POST = "POST"
+const PUT = "PUT"
 
-function WebAPI(config) {
-    this.makeRequest = function(method, path) {
-        return request.post(`https://${config.host}${path}`)
-        .then((err, res, body) => JSON.parse(body));
+function WebAPI(url, passwd) {
+    this.makeRequest = function(method, path, json, body) {
+        var req = {
+            url: `${url}${path}`,
+            method: method,
+            auth: {
+                user: "processor",
+                pass: passwd
+            }
+        }
+
+        if(json) req.json = true
+        if(body) {
+            if(json) {
+                req.body = body
+            } else {
+                req.form = body
+            }
+        }
+
+        return request(req)
     }
 }
 
 WebAPI.prototype.getChallenge = function() {
-    return makeRequest(GET, "/challenge");
-};
+    return this.makeRequest(GET, "/challenge", true)
+}
 WebAPI.prototype.getSubmissionList = function() {
-    return makeRequest(GET, "/submission-list");
-};
+    return this.makeRequest(GET, "/submission-list", true)
+}
+WebAPI.prototype.getSubmission = function(id) {
+    return this.makeRequest(GET, "/submission/" + id, true)
+}
+WebAPI.prototype.status = function(status, progress) {
+    return this.makeRequest(PUT, "/status", false, {
+        status: status,
+        progress: progress
+    })
+}
 
-module.exports = WebAPI;
+module.exports = WebAPI
