@@ -8,8 +8,6 @@
  * and victory/failure conditions.
  */
 
-const winconditions = require("./winconditions.js");
-const loseconditions = require("./loseconditions.js");
 const path = require("path");
 
 module.exports = function(config) {
