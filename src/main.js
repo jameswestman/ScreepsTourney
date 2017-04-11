@@ -18,37 +18,6 @@ module.exports = function(config) {
 
     var roomnum = 0;
 
-    /*
-     * Applies the previously provided room template to the given room (which
-     * should already exist).
-     *
-     * Room template:
-     * - terrain: The terrain of the room, formatted as a 2500-character string,
-     * where 0=empty, 1=natural wall, 2=swamp, 3=both (see TERRAIN_MASK
-     * constants)
-     * - objects: (optional) An array of objects. No objects will be in the room
-     *   (not even sources or a controller!) if this is omitted.
-     *   - x, y: The position of the object.
-     *   - type: The type of object.
-     *   - Other standard object properties are allowed, such as energy, store,
-     *     etc. If room is specified, it is overwritten.
-     */
-    function applyRoomTemplate(room) {
-        if(!roomTemplate.terrain) throw "Room template does not specify terrain";
-
-        db["rooms.terrain"].update({ room: room }, { $set: { terrain: roomTemplate.terrain } });
-        sb.map.updateRoomImageAssets(room);
-
-        db["rooms.objects"].removeWhere({ room: room });
-
-        if(roomTemplate.objects) {
-            for(let i of roomTemplate.objects) {
-                i.room = room;
-                db["rooms.objects"].insert(i);
-            }
-        }
-    }
-
     function addPlayer(name, opts) {
         // create the player's room
         var room = "W" + Math.floor(roomnum / 10) + "N" + (roomnum % 10);
