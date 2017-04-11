@@ -2,6 +2,7 @@
 
 const request = require('request-promise-native')
 const webinterface = require('../webinterface')
+const _ = require('lodash')
 
 module.exports = function(config) {
     // change history chunk size to 100
@@ -13,7 +14,7 @@ module.exports = function(config) {
     // create room history handler
     config.engine.on("saveRoomHistory", (name, baseTime, data) => {
         // get rid of obnoxious notifyWhenAttacked properties
-        for(let obj of data.ticks[baseTime]) delete obj.notifyWhenAttacked
+        _.forEach(data.ticks["" + baseTime], obj => delete obj.notifyWhenAttacked)
 
         // upload history
         // TODO: error handling
