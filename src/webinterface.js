@@ -50,5 +50,13 @@ WebAPI.prototype.status = function(status, progress) {
         progress: progress
     })
 }
+WebAPI.prototype.tickrate = function(tickrate) {
+    return this.makeRequest(PUT, "/tickrate", false, {
+        tickrate: tickrate
+    })
+}
+WebAPI.prototype.roomHistory = function(data) {
+    return this.makeRequest(POST, "/room-history/" + data.room, true, data)
+};
 
 module.exports = WebAPI
