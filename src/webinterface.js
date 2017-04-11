@@ -56,7 +56,7 @@ WebAPI.prototype.tickrate = function(tickrate) {
     })
 }
 WebAPI.prototype.roomHistory = function(data) {
-    return this.makeRequest(POST, "/room-history/" + data.room, true, data)
+    return this.makeRequest(POST, "/room-history", true, data)
 };
 
 module.exports = WebAPI

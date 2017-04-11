@@ -44,7 +44,12 @@ var mods = {
 // download and save challenge
 log("Downloading challenge info")
 api.getChallenge()
-.then(_challenge => fs.writeFile(path.join(dir, "challenge.json"), JSON.stringify(challenge = _challenge)))
+.then(_challenge => {
+    challenge = _challenge
+    challenge.interface = args.interface
+    challenge.apikey = args.apikey
+    fs.writeFile(path.join(dir, "challenge.json"), JSON.stringify(challenge = _challenge))
+})
 .then(() => log("Downloading submissions"))
 // download submission list
 .then(() => api.getSubmissionList())
@@ -67,7 +72,7 @@ api.getChallenge()
         })
     ))
 )
-.then(() => mods.mods.push(path.join(__dirname, "mod", "index.js")))
+.then(() => mods.mods.push(path.join(__dirname, "src", "mod", "index.js")))
 // write mods file
 .then(() => fs.writeFile(path.join(dir, "mods.json"), JSON.stringify(mods)))
 // .catch(err => console.log(err))
