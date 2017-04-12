@@ -4,6 +4,8 @@ const simple_border = require('./simple_border')
 const fs = require('fs-promise')
 const path = require('path')
 
+const NPC_USER_ID = "9"
+
 module.exports = function(config) {
     var roomTerrain = config.challenge.rules.terrain
     var roomObjects = config.challenge.rules.objects
@@ -44,7 +46,8 @@ module.exports = function(config) {
                 {
                     "type": "terminal",
                     "x": 25,
-                    "y": 25
+                    "y": 25,
+                    user: NPC_USER_ID
                 },
             ]);
         }
@@ -150,13 +153,24 @@ module.exports = function(config) {
             sb.bots.removeUser("JackBot")
         }
 
-        function addAllPlayers() {
+        function setup() {
             sb.system.pauseSimulation()
 
             config.challengeAPI.status("Adding scripts to game world")
 
+            // remove the obnoxous default bots
             removeDefaultBots()
 
+            // create user to own NPC terminals
+            db["users"].insert({
+                _id: NPC_USER_ID,
+                username: "NPC",
+                usernameLower: "npc",
+                gcl: 0,
+                cpu: 0
+            })
+
+            // add users
             var scripts = fs.readdirSync("scripts")
             for(let filename of scripts) {
                 var submission = JSON.parse(fs.readFileSync(path.join("scripts", filename)))
@@ -172,6 +186,6 @@ module.exports = function(config) {
             sb.system.resumeSimulation()
         }
 
-        sb.addAllPlayers = addAllPlayers
+        sb.setup = setup
     })
 }
