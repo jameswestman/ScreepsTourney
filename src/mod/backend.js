@@ -25,8 +25,9 @@ module.exports = function(config) {
 
             if(objects) {
                 for(let obj of objects) {
-                    obj.room = room
-                    db["rooms.objects"].insert(obj)
+                    var clone = JSON.parse(JSON.stringify(obj))
+                    clone.room = room
+                    db["rooms.objects"].insert(clone)
                 }
             }
 
