@@ -11,6 +11,7 @@ module.exports = function(config) {
     var roomObjects = config.challenge.rules.objects
 
     var db = config.common.storage.db
+    var env = config.common.storage.env
     var C = config.common.constants
 
     config.cli.on("cliSandbox", sb => {
@@ -99,6 +100,7 @@ module.exports = function(config) {
                 cpu: config.challenge.rules.cpu || 30,
                 active: true,
                 cpuAvailable: 10000,
+                registeredDate: new Date(),
                 badge: {
                     type: 11,
                     color1: '#c03a64',
@@ -117,6 +119,9 @@ module.exports = function(config) {
                 activeSim: true,
                 branch: "world"
             })
+
+            // set memory
+            env.set(env.keys.MEMORY + id, "{}")
 
             // set up room terrain
             applyRoomTemplate(room)
@@ -143,7 +148,8 @@ module.exports = function(config) {
                 hits: C.SPAWN_HITS,
                 hitsMax: C.SPAWN_HITS,
 
-                spawning: null
+                spawning: null,
+                notifyWhenAttacked: false
             })
         }
 
@@ -179,12 +185,13 @@ module.exports = function(config) {
                 addPlayer(id, submission)
             }
 
+            // important! update terrain data so pathfinding works
+            sb.map.updateTerrainData()
+
             // if forcing GC is allowed, do so
             if(global.gc) global.gc()
 
             config.challengeAPI.status("~Start!")
-
-            sb.system.resumeSimulation()
         }
 
         sb.setup = setup
