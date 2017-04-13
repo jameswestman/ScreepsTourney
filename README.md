@@ -20,6 +20,6 @@ The processor (in this repository) downloads submissions from the web interface 
 
 It consists of a mod and a wrapper. To create and run the server, `cd` into `src` and run `./remakeServer.sh <steamApiKey> <interfaceURL>`. This will delete the current server files (if present), initialize new server files, download the challenge file and player scripts, and then start the server.
 
-Then, connect via the CLI and run `setup()`. No arguments are necessary. This will pause the simulation, load all player scripts into rooms, and then resume the simulation.
+Then, connect via the CLI and run `setup()`. No arguments are necessary. This will pause the simulation and load all player scripts into rooms. It will leave the simulation paused. It must then be restarted in order to update pathfinding.
 
-If the server crashes for any reason, do not run these steps again. Simply run `screeps start` from the `server` directory and the simulation will resume.
+To restart the server, do not run these steps again. Simply run `screeps start` from the `server` directory and the simulation will resume.
