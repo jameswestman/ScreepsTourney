@@ -18,8 +18,4 @@ The tourney software is in two parts: the processor and the web interface. The w
 
 The processor (in this repository) downloads submissions from the web interface and runs them in the Screeps server. When it is done, it uploads results and room histories back to the web server.
 
-It consists of a mod and a wrapper. To create and run the server, `cd` into `src` and run `./remakeServer.sh <steamApiKey> <interfaceURL>`. This will delete the current server files (if present), initialize new server files, download the challenge file and player scripts, and then start the server.
-
-Then, connect via the CLI and run `setup()`. No arguments are necessary. This will pause the simulation and load all player scripts into rooms. It will leave the simulation paused. It must then be restarted in order to update pathfinding.
-
-To restart the server, do not run these steps again. Simply run `screeps start` from the `server` directory, then log back in via CLI and run `system.resumeSimulation()`.
+It consists of a mod and a wrapper. To create and run the server, `cd` into `src` and run `./remakeServer.sh <steamApiKey> <interfaceURL>`. This will delete the current server files (if present), initialize new server files, download the challenge file and player scripts, and start the server, add the bots to the world, then restart the server.
