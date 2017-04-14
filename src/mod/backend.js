@@ -4,8 +4,6 @@ const simple_border = require('./simple_border')
 const fs = require('fs-promise')
 const path = require('path')
 
-const NPC_USER_ID = "9"
-
 module.exports = function(config) {
     var roomTerrain = config.challenge.rules.terrain
     var roomObjects = config.challenge.rules.objects
@@ -49,7 +47,7 @@ module.exports = function(config) {
                     "type": "terminal",
                     "x": 25,
                     "y": 25,
-                    user: NPC_USER_ID
+                    user: config.NPC_USER_ID
                 },
             ]);
         }
@@ -170,7 +168,7 @@ module.exports = function(config) {
 
             // create user to own NPC terminals
             db["users"].insert({
-                _id: NPC_USER_ID,
+                _id: config.NPC_USER_ID,
                 username: "NPC",
                 usernameLower: "npc",
                 gcl: 0,

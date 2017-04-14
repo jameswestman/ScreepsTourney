@@ -22,4 +22,4 @@ It consists of a mod and a wrapper. To create and run the server, `cd` into `src
 
 Then, connect via the CLI and run `setup()`. No arguments are necessary. This will pause the simulation and load all player scripts into rooms. It will leave the simulation paused. It must then be restarted in order to update pathfinding.
 
-To restart the server, do not run these steps again. Simply run `screeps start` from the `server` directory and the simulation will resume.
+To restart the server, do not run these steps again. Simply run `screeps start` from the `server` directory, then log back in via CLI and run `system.resumeSimulation()`.
