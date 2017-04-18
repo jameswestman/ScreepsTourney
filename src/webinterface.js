@@ -44,10 +44,9 @@ WebAPI.prototype.getSubmissionList = function() {
 WebAPI.prototype.getSubmission = function(id) {
     return this.makeRequest(GET, "/submission/" + id, true)
 }
-WebAPI.prototype.status = function(status, progress) {
+WebAPI.prototype.status = function(status, progress, time) {
     return this.makeRequest(PUT, "/status", false, {
-        status: status,
-        progress: progress
+        status, progress, time
     })
 }
 WebAPI.prototype.tickrate = function(tickrate) {
