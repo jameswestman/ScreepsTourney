@@ -188,10 +188,14 @@ module.exports = function(config) {
 
             // if forcing GC is allowed, do so
             if(global.gc) global.gc()
-
-            config.challengeAPI.status("~Start!")
         }
 
         sb.setup = setup
+
+        sb.begin = function() {
+            return config.common.storage.env.get(config.common.storage.env.keys.GAMETIME)
+            .then(time => config.challengeAPI.status("~START", undefined, time))
+            .then(() => sb.system.resumeSimulation())
+        }
     })
 }
