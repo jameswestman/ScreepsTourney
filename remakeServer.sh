@@ -28,7 +28,7 @@ echo 'setup()' | screeps cli &
 cliPID=$!
 
 # wait a bit
-sleep 10
+sleep 15
 
 # restart server
 kill -INT $serverPID
@@ -38,4 +38,4 @@ screeps start &
 
 sleep 5
 
-echo 'system.resumeSimulation()' | screeps cli
+echo 'begin()' | screeps cli
